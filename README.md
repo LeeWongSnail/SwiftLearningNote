@@ -10,4 +10,6 @@
 
 [Strings and Characters](https://github.com/LeeWongSnail/SwiftLearningNote/blob/main/Note/Strings%20and%20Characters.md)
 
+[Collection Types](https://github.com/LeeWongSnail/SwiftLearningNote/blob/main/Note/Collection%20Types.md)
+
 
