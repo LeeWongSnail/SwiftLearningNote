@@ -6,4 +6,8 @@
 
 [Constants and Variables](https://github.com/LeeWongSnail/SwiftLearningNote/blob/main/Constants%20and%20Variables.md)
 
+[Basic Operators](https://github.com/LeeWongSnail/SwiftLearningNote/blob/main/Note/Basic%20Operators.md)
+
+[Strings and Characters](https://github.com/LeeWongSnail/SwiftLearningNote/blob/main/Note/Strings%20and%20Characters.md)
+
 
