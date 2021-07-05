@@ -1,525 +1,371 @@
-# Collection Types
+# Functions
 
-集合类型，在Swift中集合类型主要有：数组(Array)、集合(Set)、字典(Dictionary)三种基本的集合类型。
+函数是一段完成特定任务的独立代码片段。
 
-数组是有序的数据集，集合是无序的数据集、字典是无序的键值对集
+### 函数的定义与调用
 
-![https://tva1.sinaimg.cn/large/008i3skNgy1gs4mdu2rj9j31180d7tb3.jpg](https://tva1.sinaimg.cn/large/008i3skNgy1gs4mdu2rj9j31180d7tb3.jpg)
-
-在上述的集合类型都必须明确保存的键值类型，这样可以避免插入错误的类型，同时也可以保证从集合中取出的类型也是正确的。
-
-Swift的数组、集合、字典类型被实现为泛型集合。关于泛型后续会介绍。
-
-## 集合的可变性
-
-不同于OC中通过区分可变类型和不可变类型，在Swift中如果我们将集合赋值给一个可变的变量那么这个集合就是可变的，如果将集合赋值给一个不可变类型，则集合是不可变的。
-
-## 数组
-
-数组使用有序列表存储同一类型的多个值，相同的值可以在一个数组中出现多次。
-
-数组的定义和初始化有两种写法
+当你定义一个函数时，你可以定义一个或多个有名字和类型的值，作为函数的输入，称为参数，也可以定义某种类型的值作为函数执行结束时的输出，称为返回类型。
 
 ```swift
-var arr = Array<String>()
-var arr2:[String] = []
+func greet(person: String) -> String {
+    let greeting = "Hello, " + person + "!"
+    return greeting
+}
 ```
 
-### 创建一个空数组
+该定义描述了函数的功能，它期望接收什么作为参数和执行结束时它返回的结果是什么类型。这样的定义使得函数可以在别的地方以一种清晰的方式被调用：
 
 ```swift
-var someInts: [Int] = []
-print("someInts is of type [Int] with \(someInts.count) items.")
-// 打印“someInts is of type [Int] with 0 items.”
+print(greet(person: "Anna"))
+// 打印“Hello, Anna!”
+print(greet(person: "Brian"))
+// 打印“Hello, Brian!”
 ```
 
-如果代码上下文中已经提供了类型的信息，就可以使用空数组语句创建一个空数组
+### 函数参数与返回值
+
+函数参数与返回值在 Swift 中非常的灵活。你可以定义任何类型的函数，包括从只带一个未名参数的简单函数到复杂的带有表达性参数名和不同参数选项的复杂函数。
+
+### 无参数函数
 
 ```swift
-someInts.append(3)
-// someInts 现在包含一个 Int 值
-someInts = []
-// someInts 现在是空数组，但是仍然是 [Int] 类型的。
+func sayHelloWorld() -> String {
+    return "hello, world"
+}
+print(sayHelloWorld())
+// 打印“hello, world”
 ```
 
-### 创建一个带有默认值的空数组
+### 多参数函数
 
 ```swift
-var threeDoubles = Array(repeating: 0.0, count: 3)
-// threeDoubles 是一种 [Double] 数组，等价于 [0.0, 0.0, 0.0]
-```
-
-### 通过两个数组相加创建一个数组
-
-在介绍字符串方法时，我们知道可以使用+来连接两个字符串，这种方式对于数组来说同样适用，但是务必保证数组中元素的类型相同
-
-```swift
-var anotherThreeDoubles = Array(repeating: 2.5, count: 3)
-// anotherThreeDoubles 被推断为 [Double]，等价于 [2.5, 2.5, 2.5]
-
-var sixDoubles = threeDoubles + anotherThreeDoubles
-// sixDoubles 被推断为 [Double]，等价于 [0.0, 0.0, 0.0, 2.5, 2.5, 2.5]
-```
-
-### 用数组字面量构造数组
-
-```swift
-var shoppingList: [String] = ["Eggs", "Milk"]
-// shoppingList 已经被构造并且拥有两个初始项。
-```
-
-对于上面这种写法，我们在上面也介绍到，实际上可以简写
-
-```swift
-var shoppingList = ["Eggs", "Milk"]
-```
-
-### 访问和修改数组
-
-- 获取数组元素个数
-
-    ```swift
-    print("The shopping list contains \(shoppingList.count) items.")
-    // 输出“The shopping list contains 2 items.”（这个数组有2个项）
-    ```
-
-- 判断数组是否为空
-
-    ```swift
-    if shoppingList.isEmpty {
-        print("The shopping list is empty.")
+func greet(person: String, alreadyGreeted: Bool) -> String {
+    if alreadyGreeted {
+        return greetAgain(person: person)
     } else {
-        print("The shopping list is not empty.")
+        return greet(person: person)
     }
-    // 打印“The shopping list is not empty.”（shoppinglist 不是空的）
-    ```
+}
+print(greet(person: "Tim", alreadyGreeted: true))
+// 打印“Hello again, Tim!”
+```
 
-- 数组添加元素
+### 无返回值函数
 
-    ```swift
-    shoppingList.append("Flour")
-    // shoppingList 现在有3个数据项，似乎有人在摊煎饼
-    ```
+```swift
+func greet(person: String) {
+    print("Hello, \(person)!")
+}
+greet(person: "Dave")
+// 打印“Hello, Dave!”
+```
 
-    同样我们可以通过+或者+=来拼接数组
+注意:
 
-    ```swift
-    shoppingList += ["Baking Powder"]
-    // shoppingList 现在有四项了
-    shoppingList += ["Chocolate Spread", "Cheese", "Butter"]
-    // shoppingList 现在有七项了
-    ```
+严格地说，即使没有明确定义返回值，该 `greet(Person：)` 函数仍然返回一个值。没有明确定义返回类型的函数的返回一个 `Void` 类型特殊值，该值为一个空元组，写成 ()。
 
-- 获取数组中的元素
+```swift
+func printAndCount(string: String) -> Int {
+    print(string)
+    return string.count
+}
+func printWithoutCounting(string: String) {
+    let _ = printAndCount(string: string)
+}
+printAndCount(string: "hello, world")
+// 打印“hello, world”，并且返回值 12
+printWithoutCounting(string: "hello, world")
+// 打印“hello, world”，但是没有返回任何值
+```
 
-    ```swift
-    var firstItem = shoppingList[0]
-    // 第一项是“Eggs”
-    ```
+### 多重返回值函数
 
-- 修改数组中的元素
+你可以用元组（tuple）类型让多个值作为一个复合值从函数中返回。
 
-    ```swift
-    shoppingList[0] = "Six eggs"
-    // 其中的第一项现在是“Six eggs”而不是“Eggs”
-    ```
-
-    在通过下标来修改数组时，我们必须保证提供的下标是有效的。我们不仅可以利用下标改变数组中某一个元素的值，还可以改变一个范围内元素的值
-
-    ```swift
-    shoppingList[4...6] = ["Bananas", "Apples"]
-    // shoppingList 现在有6项
-    ```
-
-    在修改某个范围内的值时，即使提供的范围与赋值的数组个数不一样也是没有问题的。
-
-- 向数组中插入元素insert(_:at:)
-
-    ```swift
-    shoppingList.insert("Maple Syrup", at: 0)
-    // shoppingList 现在有7项
-    // 现在是这个列表中的第一项是“Maple Syrup”
-    ```
-
-- 删除数组中的元素 remove(at:)
-
-    ```swift
-    let mapleSyrup = shoppingList.remove(at: 0)
-    // 索引值为0的数据项被移除
-    // shoppingList 现在只有6项，而且不包括 Maple Syrup
-    // mapleSyrup 常量的值等于被移除数据项“Maple Syrup”
-    ```
-
-    注意对于数组中所有通过下标操作的方法，都必须保证下标的合法，因此在使用索引前都必须校验其有效性，否则会引发运行时错误。
-
-    如果我们只是想移除数组中的最后一项，我们可以使用removeLast()
-
-    ```swift
-    let apples = shoppingList.removeLast()
-    // 数组的最后一项被移除了
-    // shoppingList 现在只有5项，不包括 Apples
-    // apples 常量的值现在等于字符串“Apples”
-    ```
-
-    ### 数组的变量
-
-    我们可以直接通过for-in来遍历数组中的元素
-
-    ```swift
-    for item in shoppingList {
-        print(item)
+```swift
+func minMax(array: [Int]) -> (min: Int, max: Int) {
+    var currentMin = array[0]
+    var currentMax = array[0]
+    for value in array[1..<array.count] {
+        if value < currentMin {
+            currentMin = value
+        } else if value > currentMax {
+            currentMax = value
+        }
     }
-    // Six eggs
-    // Milk
-    // Flour
-    // Baking Powder
-    // Bananas
-    ```
+    return (currentMin, currentMax)
+}
+```
 
-    我们还可以他调用数组的enumerated()方法来遍历数组,这时我们可以同时获取到数组的每个数据项和索引值
+minMax(array:) 函数返回一个包含两个 Int 值的元组，这些值被标记为 min 和 max ，以便查询函数的返回值时可以通过名字访问它们。
 
-    ```swift
-    for (index, value) in shoppingList.enumerated() {
-        print("Item \(String(index + 1)): \(value)")
+```swift
+let bounds = minMax(array: [8, -6, 2, 109, 3, 71])
+print("min is \(bounds.min) and max is \(bounds.max)")
+// 打印“min is -6 and max is 109”
+```
+
+### 可选元组返回类型
+
+如果函数返回的元组类型有可能整个元组都“没有值”，你可以使用可选的 元组返回类型反映整个元组可以是 nil 的事实
+
+```swift
+func minMax(array: [Int]) -> (min: Int, max: Int)? {
+    if array.isEmpty { return nil }
+    var currentMin = array[0]
+    var currentMax = array[0]
+    for value in array[1..<array.count] {
+        if value < currentMin {
+            currentMin = value
+        } else if value > currentMax {
+            currentMax = value
+        }
     }
-    // Item 1: Six eggs
-    // Item 2: Milk
-    // Item 3: Flour
-    // Item 4: Baking Powder
-    // Item 5: Bananas
-    ```
+    return (currentMin, currentMax)
+}
+```
 
-    ## 集合
+*注意:可选元组类型如 `(Int, Int)?` 与元组包含可选类型如 `(Int?, Int?)` 是不同的。可选的元组类型，整个元组是可选的，而不只是元组中的每个元素值。*
 
-    集合用来存储相同类型并且没有确定顺序的值，当集合元素顺序不重要或者希望确保每个元素只出现一次时可以使用集合而不是数组。
+### 隐式返回的函数
 
-    ### 集合类型的哈希值
+如果一个函数的整个函数体是一个单行表达式，这个函数可以隐式地返回这个表达式。
 
-    一个类型为了存储在集合中，该类型必须是可哈希化的——也就是说，该类型必须提供一个方法来计算它的哈希值。一个哈希值是 Int 类型的，相等的对象哈希值必须相同，比如 a == b,因此必须 a.hashValue == b.hashValue。
+```swift
+func greeting(for person: String) -> String {
+    "Hello, " + person + "!"
+}
+print(greeting(for: "Dave"))
+// 打印 "Hello, Dave!"
 
-    你可以使用自定义的类型作为集合值的类型或者是字典键的类型，但需要使自定义类型遵循 Swift 标准库中的 `Hashable` 协议。遵循 `Hashable` 协议的类型需要提供一个类型为 `Int` 的可读属性 `hashValue`。由类型的 `hashValue` 属性返回的值不需要在同一程序的不同执行周期或者不同程序之间保持相同。
+func anotherGreeting(for person: String) -> String {
+    return "Hello, " + person + "!"
+}
+print(anotherGreeting(for: "Dave"))
+// 打印 "Hello, Dave!"
+```
 
-    因为 `Hashable` 协议遵循 `Equatable` 协议，所以遵循该协议的类型也必须提供一个“是否相等”运算符（`==`）的实现。这个 `Equatable` 协议要求任何遵循 `==` 实现的实例间都是一种相等的关系。也就是说，对于 `a,b,c` 三个值来说，`==` 的实现必须满足下面三种情况：
+## 函数参数标签和参数名称
 
-    - `a == a`(自反性)
-    - `a == b` 意味着 `b == a`(对称性)
-    - `a == b && b == c` 意味着 `a == c`(传递性)
+每个函数参数都有一个参数标签（argument label）以及一个参数名称（parameter name）。参数标签在调用函数的时候使用；调用的时候需要将函数的参数标签写在对应的参数前面。参数名称在函数的实现中使用。默认情况下，函数参数使用参数名称来作为它们的参数标签。
 
-    自反性、对称性、传递性 是等价关系的三个条件
+```swift
+func someFunction(firstParameterName: Int, secondParameterName: Int) {
+    // 在函数体内，firstParameterName 和 secondParameterName 代表参数中的第一个和第二个参数值
+}
+someFunction(firstParameterName: 1, secondParameterName: 2)
+```
 
-    ### 集合的创建和初始化
+### 指定参数标签
 
-    ```swift
-    var letters = Set<Character>()
-    print("letters is of type Set<Character> with \(letters.count) items.")
-    // 打印“letters is of type Set<Character> with 0 items.”
-    ```
+你可以在参数名称前指定它的参数标签，中间以空格分隔：
 
-    此外，如果上下文提供了类型信息，比如作为函数的参数或者已知类型的变量或者常量，可以通过一个空数组来创建一个空集合。
+```swift
+func someFunction(argumentLabel parameterName: Int) {
+    // 在函数体内，parameterName 代表参数值
+}
+```
 
-    ```swift
-    letters.insert("a")
-    // letters 现在含有1个 Character 类型的值
-    letters = []
-    // letters 现在是一个空的 Set，但是它依然是 Set<Character> 类型
-    ```
+参数标签的使用能够让一个函数在调用时更有表达力，更类似自然语言，并且仍保持了函数内部的可读性以及清晰的意图。
 
-    ### 用数组字面量来创建集合
+```swift
+func greet(person: String, from hometown: String) -> String {
+    return "Hello \(person)!  Glad you could visit from \(hometown)."
+}
+print(greet(person: "Bill", from: "Cupertino"))
+// 打印“Hello Bill!  Glad you could visit from Cupertino.”
+```
 
-    ```swift
-    var favoriteGenres: Set<String> = ["Rock", "Classical", "Hip hop"]
-    // favoriteGenres 被构造成含有三个初始值的集合
-    ```
+### 忽略参数标签
 
-    一个集合类型不能从数组字面量中被直接推断出来，因此 Set 类型必须显式声明。然而，由于 Swift 的类型推断功能，如果你想使用一个数组字面量构造一个集合并且与该数组字面量中的所有元素类型相同，那么无须写出集合的具体类型。favoriteGenres 的构造形式可以采用简化的方式代替：
+如果你不希望为某个参数添加一个标签，可以使用一个下划线（_）来代替一个明确的参数标签。
 
-    ```swift
-    var favoriteGenres: Set = ["Rock", "Classical", "Hip hop"]
-    ```
+```swift
+func someFunction(_ firstParameterName: Int, secondParameterName: Int) {
+     // 在函数体内，firstParameterName 和 secondParameterName 代表参数中的第一个和第二个参数值
+}
+someFunction(1, secondParameterName: 2)
+```
 
-    ### 访问和修改一个集合
+如果一个参数有一个标签，那么在调用的时候必须使用标签来标记这个参数。
 
-    - 获取集合中元素个数
+### 默认参数值
 
-        ```swift
-        print("I have \(favoriteGenres.count) favorite music genres.")
-        // 打印“I have 3 favorite music genres.”
-        ```
+你可以在函数体中通过给参数赋值来为任意一个参数定义默认值（Deafult Value）。当默认值被定义后，调用这个函数时可以忽略这个参数。
 
-    - 判断集合是否为空
+```swift
+func someFunction(parameterWithoutDefault: Int, parameterWithDefault: Int = 12) {
+    // 如果你在调用时候不传第二个参数，parameterWithDefault 会值为 12 传入到函数体中。
+}
+someFunction(parameterWithoutDefault: 3, parameterWithDefault: 6) // parameterWithDefault = 6
+someFunction(parameterWithoutDefault: 4) // parameterWithDefault = 12
+```
 
-        ```swift
-        if favoriteGenres.isEmpty {
-            print("As far as music goes, I'm not picky.")
-        } else {
-            print("I have particular music preferences.")
-        }
-        // 打印“I have particular music preferences.”
-        ```
+将不带有默认值的参数放在函数参数列表的最前。一般来说，没有默认值的参数更加的重要，将不带默认值的参数放在最前保证在函数调用时，非默认参数的顺序是一致的，同时也使得相同的函数在不同情况下调用时显得更为清晰。
 
-    - 集合中插入新元素
+### 可变参数
 
-        ```swift
-        favoriteGenres.insert("Jazz")
-        // favoriteGenres 现在包含4个元素
-        ```
+一个可变参数（variadic parameter）可以接受零个或多个值。函数调用时，你可以用可变参数来指定函数参数可以被传入不确定数量的输入值。通过在变量类型名后面加入（...）的方式来定义可变参数。
 
-    - 删除集合中一个元素
+可变参数的传入值在函数体中变为此类型的一个数组。例如，一个叫做 numbers 的 Double... 型可变参数，在函数体内可以当做一个叫 numbers 的 [Double] 型的数组常量。
 
-        ```swift
-        if let removedGenre = favoriteGenres.remove("Rock") {
-            print("\(removedGenre)? I'm over it.")
-        } else {
-            print("I never much cared for that.")
-        }
-        // 打印“Rock? I'm over it.”
-        ```
-
-    - 删除集合中所有元素
-
-        ```swift
-        favoriteGenres.removeAll()
-        ```
-
-    - 判断集合中是否包含某个元素
-
-        ```swift
-        if favoriteGenres.contains("Funk") {
-            print("I get up on the good foot.")
-        } else {
-            print("It's too funky in here.")
-        }
-        // 打印“It's too funky in here.”
-        ```
-
-    ### 遍历一个集合
-
-    我们可以使用for-in遍历一个集合
-
-    ```swift
-    for genre in favoriteGenres {
-        print("\(genre)")
+```swift
+func arithmeticMean(_ numbers: Double...) -> Double {
+    var total: Double = 0
+    for number in numbers {
+        total += number
     }
-    // Classical
-    // Jazz
-    // Hip hop
-    ```
+    return total / Double(numbers.count)
+}
+arithmeticMean(1, 2, 3, 4, 5)
+// 返回 3.0, 是这 5 个数的平均数。
+arithmeticMean(3, 8.25, 18.75)
+// 返回 10.0, 是这 3 个数的平均数。
+```
 
-    由于集合是无序的，如果我们要按照某种顺序来遍历集合时我们可以用到sort()方法，他将返回一个有序数组
+*注意：一个函数最多只能拥有一个可变参数。*
 
-    ```swift
-    for genre in favoriteGenres.sorted() {
-        print("\(genre)")
-    }
-    // Classical
-    // Hip hop
-    // Jazz
-    ```
+### 输入输出参数
 
-    ### 集合操作
+函数参数默认是常量。试图在函数体中更改参数值将会导致编译错误。这意味着你不能错误地更改参数值。如果你想要一个函数可以修改参数的值，并且想要在这些修改在函数调用结束后仍然存在，那么就应该把这个参数定义为*输入输出参数（In-Out Parameters）*。
 
-    集合操作有一下几种:
+定义一个输入输出参数时，在参数定义前加 `inout` 关键字。一个 `输入输出参数`有传入函数的值，这个值被函数修改，然后被传出函数，替换原来的值。想获取更多的关于输入输出参数的细节和相关的编译器优化，请查看 [输入输出参数](notion://www.notion.so/swift/yu-yan-can-kao/06_declarations#in-out-parameters) 一节。
 
-    - 使用 `intersection(_:)` 方法根据两个集合的交集创建一个新的集合。
-    - 使用 `symmetricDifference(_:)` 方法根据两个集合不相交的值创建一个新的集合。
-    - 使用 `union(_:)` 方法根据两个集合的所有值创建一个新的集合。
-    - 使用 `subtracting(_:)` 方法根据不在另一个集合中的值创建一个新的集合。
+你只能传递变量给输入输出参数。你不能传入常量或者字面量，因为这些量是不能被修改的。当传入的参数作为输入输出参数时，需要在参数名前加 `&` 符，表示这个值可以被函数修改。
 
-    ![https://tva1.sinaimg.cn/large/008i3skNgy1gs4nwqjjzwj30v60nn40b.jpg](https://tva1.sinaimg.cn/large/008i3skNgy1gs4nwqjjzwj30v60nn40b.jpg)
+*注意:输入输出参数不能有默认值，而且可变参数不能用 `inout` 标记。*
 
-    ```swift
-    let oddDigits: Set = [1, 3, 5, 7, 9]
-    let evenDigits: Set = [0, 2, 4, 6, 8]
-    let singleDigitPrimeNumbers: Set = [2, 3, 5, 7]
+```swift
+func swapTwoInts(_ a: inout Int, _ b: inout Int) {
+    let temporaryA = a
+    a = b
+    b = temporaryA
+}
 
-    oddDigits.union(evenDigits).sorted()
-    // [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-    oddDigits.intersection(evenDigits).sorted()
-    // []
-    oddDigits.subtracting(singleDigitPrimeNumbers).sorted()
-    // [1, 9]
-    oddDigits.symmetricDifference(singleDigitPrimeNumbers).sorted()
-    // [1, 2, 9]
-    ```
+var someInt = 3
+var anotherInt = 107
+swapTwoInts(&someInt, &anotherInt)
+print("someInt is now \(someInt), and anotherInt is now \(anotherInt)")
+// 打印“someInt is now 107, and anotherInt is now 3”
+```
 
-    ### 集合成员关系和相等
+输入输出参数和返回值是不一样的。上面的 swapTwoInts 函数并没有定义任何返回值，但仍然修改了 someInt 和 anotherInt 的值。输入输出参数是函数对函数体外产生影响的另一种方式。
 
-    下面的插图描述了三个集合 a、b 和 c，以及通过重叠区域表述集合间共享的元素。集合 a 是集合 b 的父集合，因为 a 包含了 b 中所有的元素。相反的，集合 b 是集合 a 的子集合，因为属于 b 的元素也被 a 包含。集合 b 和集合 c 是不相交的，因为它们之间没有共同的元素。
+## 函数类型
 
-    ![https://tva1.sinaimg.cn/large/008i3skNgy1gs4nz8z3buj30un0hzgmc.jpg](https://tva1.sinaimg.cn/large/008i3skNgy1gs4nz8z3buj30un0hzgmc.jpg)
+每个函数都有种特定的函数类型，函数的类型由函数的参数类型和返回类型组成。
 
-    - 使用“是否相等”运算符（`==`）来判断两个集合包含的值是否全部相同。
-    - 使用 `isSubset(of:)` 方法来判断一个集合中的所有值是否也被包含在另外一个集合中。
-    - 使用 `isSuperset(of:)` 方法来判断一个集合是否包含另一个集合中所有的值。
-    - 使用 `isStrictSubset(of:)` 或者 `isStrictSuperset(of:)` 方法来判断一个集合是否是另外一个集合的子集合或者父集合并且两个集合并不相等。
-    - 使用 `isDisjoint(with:)` 方法来判断两个集合是否不含有相同的值（是否没有交集）。
+```swift
+func addTwoInts(_ a: Int, _ b: Int) -> Int {
+    return a + b
+}
+func multiplyTwoInts(_ a: Int, _ b: Int) -> Int {
+    return a * b
+}
+```
 
-    ```swift
-    let houseAnimals: Set = ["🐶", "🐱"]
-    let farmAnimals: Set = ["🐮", "🐔", "🐑", "🐶", "🐱"]
-    let cityAnimals: Set = ["🐦", "🐭"]
+这两个函数的类型是 (Int, Int) -> Int，可以解读为:*“这个函数类型有两个 Int 型的参数并返回一个 Int 型的值”。*
 
-    houseAnimals.isSubset(of: farmAnimals)
-    // true
-    farmAnimals.isSuperset(of: houseAnimals)
-    // true
-    farmAnimals.isDisjoint(with: cityAnimals)
-    // true
-    ```
+```swift
+func printHelloWorld() {
+    print("hello, world")
+}
+```
 
-    ## 字典
+这个函数的类型是：() -> Void，或者叫“没有参数，并返回 Void 类型的函数”。
 
-    字典是一种无序集合，它存储的是键值对之间的关系，其所有键值对之间的关系，其所有键的值需要是相同的类型，所有值的类型也需要相同。每个值(Value)都关联唯一的键(Key),键作为字典中这个值数据的标识符。
+### 使用函数类型
 
-    ### 字典类型简化语法
+在 Swift 中，使用函数类型就像使用其他类型一样。例如，你可以定义一个类型为函数的常量或变量，并将适当的函数赋值给它：
 
-    Swift的字典使用Dictionary<Key,Value>定义，其中Key是一种可以再字典中被用作键的类型，Value是字典中对应于这些键所存储值的数据类型。
+```swift
+var mathFunction: (Int, Int) -> Int = addTwoInts
+```
 
-    注意：一个字典的Key类型必须遵循Hashable协议，就像Set的值类型
+”定义一个叫做 mathFunction 的变量，类型是‘一个有两个 Int 型的参数并返回一个 Int 型的值的函数’，并让这个新变量指向 addTwoInts 函数”。
 
-    ### 创建一个空字典
+```swift
+print("Result: \(mathFunction(2, 3))")
+// Prints "Result: 5"
+```
 
-    ```swift
-    var namesOfIntegers: [Int: String] = [:]
-    // namesOfIntegers 是一个空的 [Int: String] 字典
-    ```
+有相同匹配类型的不同函数可以被赋值给同一个变量，就像非函数类型的变量一样：
 
-    如果上下文已经提供了信息，我们可以将上面的代码简写为:
+```swift
+mathFunction = multiplyTwoInts
+print("Result: \(mathFunction(2, 3))")
+// Prints "Result: 6"
+```
 
-    ```swift
-    namesOfIntegers[16] = "sixteen"
-    // namesOfIntegers 现在包含一个键值对
-    namesOfIntegers = [:]
-    // namesOfIntegers 又成为了一个 [Int: String] 类型的空字典
-    ```
+### 函数类型作为参数类型
 
-    ### 用字典字面量创建字典
+你可以用 (Int, Int) -> Int 这样的函数类型作为另一个函数的参数类型。这样你可以将函数的一部分实现留给函数的调用者来提供。
 
-    ```swift
-    [key 1: value 1, key 2: value 2, key 3: value 3]
-    var airports: [String: String] = ["YYZ": "Toronto Pearson", "DUB": "Dublin"]
-    ```
+```swift
+func printMathResult(_ mathFunction: (Int, Int) -> Int, _ a: Int, _ b: Int) {
+    print("Result: \(mathFunction(a, b))")
+}
+printMathResult(addTwoInts, 3, 5)
+// 打印“Result: 8”
+```
 
-    假如我们在构造字典时，如果他的键值都有各自一致的类型，那么就不必写出字典的类型
+printMathResult(*:*:*:) 函数的作用就是输出另一个适当类型的数学函数的调用结果。它不关心传入函数是如何实现的，只关心传入的函数是不是一个正确的类型。这使得 printMathResult(*:*:*:) 能以一种类型安全（type-safe）的方式将一部分功能转给调用者实现。
 
-    ```swift
-    var airports = ["YYZ": "Toronto Pearson", "DUB": "Dublin"]
-    ```
+### 函数类型作为返回类型
 
-    ### 修改和访问字典
+你可以用函数类型作为另一个函数的返回类型。你需要做的是在返回箭头（->）后写一个完整的函数类型。
 
-    - 获取字典键值对个数
+```swift
+func stepForward(_ input: Int) -> Int {
+    return input + 1
+}
+func stepBackward(_ input: Int) -> Int {
+    return input - 1
+}
 
-        ```swift
-        print("The dictionary of airports contains \(airports.count) items.")
-        // 打印“The dictionary of airports contains 2 items.”（这个字典有两个数据项）
-        ```
+func chooseStepFunction(backward: Bool) -> (Int) -> Int {
+    return backward ? stepBackward : stepForward
+}
 
-    - 判断字典是否为空
+var currentValue = 3
+let moveNearerToZero = chooseStepFunction(backward: currentValue > 0)
+// moveNearerToZero 现在指向 stepBackward() 函数。
 
-        ```swift
-        if airports.isEmpty {
-            print("The airports dictionary is empty.")
-        } else {
-            print("The airports dictionary is not empty.")
-        }
-        // 打印“The airports dictionary is not empty.”
-        ```
+print("Counting to zero:")
+// Counting to zero:
+while currentValue != 0 {
+    print("\(currentValue)... ")
+    currentValue = moveNearerToZero(currentValue)
+}
+print("zero!")
+// 3...
+// 2...
+// 1...
+// zero!
+```
 
-    - 添加或者修改字典中的键值对
+## 嵌套函数
 
-        ```swift
-        airports["LHR"] = "London"
-        // airports 字典现在有三个数据项
-        ```
+到目前为止本章中你所见到的所有函数都叫全局函数（global functions），它们定义在全局域中。你也可以把函数定义在别的函数体中，称作 嵌套函数（nested functions）。
 
-    - 修改字典中的数据
-
-        ```swift
-        if let oldValue = airports.updateValue("Dublin Airport", forKey: "DUB") {
-            print("The old value for DUB was \(oldValue).")
-        }
-        // 输出“The old value for DUB was Dublin.”
-        ```
-
-        字典的 updateValue(*:forKey:) 方法可以设置或者更新特定键对应的值。就像上面所示的下标示例，updateValue(*:forKey:) 方法在这个键不存在对应值的时候会设置新值或者在存在时更新已存在的值。和下标的方式不同，updateValue(_:forKey:) 这个方法返回更新值之前的原值。这样使得你可以检查更新是否成功。
-
-        updateValue(_:forKey:) 方法会返回对应值类型的可选类型
-
-        同样根据下标语法通过键键获取字典中对应的值时返回的也是一个可选类型，如果键对应的值存在则返回对应的值，否则返回nil
-
-        ```swift
-        if let airportName = airports["DUB"] {
-            print("The name of the airport is \(airportName).")
-        } else {
-            print("That airport is not in the airports dictionary.")
-        }
-        // 打印“The name of the airport is Dublin Airport.”
-        ```
-
-    - 移除字典中的某个键值对
-
-        第一种方法我们可以通过下标的方法将某个键对应的值置为nil
-
-        ```swift
-        airports["APL"] = "Apple Internation"
-        // “Apple Internation”不是真的 APL 机场，删除它
-        airports["APL"] = nil
-        // APL 现在被移除了
-        ```
-
-        另外一种方式是通过remove方法移除键值对
-
-        ```swift
-        if let removedValue = airports.removeValue(forKey: "DUB") {
-            print("The removed airport's name is \(removedValue).")
-        } else {
-            print("The airports dictionary does not contain a value for DUB.")
-        }
-        // 打印“The removed airport's name is Dublin Airport.”
-        ```
-
-        remove方法的返回值，当键值对存在时返回要删除键值对的值，当键值对不存在时返回nil
-
-        ### 字典的遍历
-
-        同数组和集合一样，我们可以通过for-in的方式遍历字典
-
-        ```swift
-        for (airportCode, airportName) in airports {
-            print("\(airportCode): \(airportName)")
-        }
-        // YYZ: Toronto Pearson
-        // LHR: London Heathrow
-        ```
-
-        通过访问keys和values也可以遍历字典
-
-        ```swift
-        for airportCode in airports.keys {
-            print("Airport code: \(airportCode)")
-        }
-        // Airport code: YYZ
-        // Airport code: LHR
-
-        for airportName in airports.values {
-            print("Airport name: \(airportName)")
-        }
-        // Airport name: Toronto Pearson
-        // Airport name: London Heathrow
-        ```
-
-        字典的键和值都可以看做一个数组
-
-        ```swift
-        let airportCodes = [String](airports.keys)
-        // airportCodes 是 ["YYZ", "LHR"]
-
-        let airportNames = [String](airports.values)
-        // airportNames 是 ["Toronto Pearson", "London Heathrow"]
-        ```
-
-        字典是无序集合类型，为了以特定的顺序遍历字典的键或值，可以对字典的keys或values属性使用sorted()方法。
-
-
+```swift
+func chooseStepFunction(backward: Bool) -> (Int) -> Int {
+    func stepForward(input: Int) -> Int { return input + 1 }
+    func stepBackward(input: Int) -> Int { return input - 1 }
+    return backward ? stepBackward : stepForward
+}
+var currentValue = -4
+let moveNearerToZero = chooseStepFunction(backward: currentValue > 0)
+// moveNearerToZero now refers to the nested stepForward() function
+while currentValue != 0 {
+    print("\(currentValue)... ")
+    currentValue = moveNearerToZero(currentValue)
+}
+print("zero!")
+// -4...
+// -3...
+// -2...
+// -1...
+// zero!
+```
 
