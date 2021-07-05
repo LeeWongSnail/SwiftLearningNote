@@ -12,4 +12,6 @@
 
 [Collection Types](https://github.com/LeeWongSnail/SwiftLearningNote/blob/main/Note/Collection%20Types.md)
 
+[Functions](https://github.com/LeeWongSnail/SwiftLearningNote/blob/main/Note/Functions.md)
+
 
