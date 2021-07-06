@@ -14,4 +14,6 @@
 
 [Functions](https://github.com/LeeWongSnail/SwiftLearningNote/blob/main/Note/Functions.md)
 
+[Closures](https://github.com/LeeWongSnail/SwiftLearningNote/blob/main/Note/Closures.md)
+
 
