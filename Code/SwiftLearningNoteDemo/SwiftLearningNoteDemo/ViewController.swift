@@ -13,7 +13,17 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // 打印多行字符串
-        stringIndex()
+//        switchFallthrough()
+        
+        let tenIncrement = makeIncrementer(forIncrement: 10)
+        print(tenIncrement())
+        print(tenIncrement())
+        print(tenIncrement())
+        
+        let sevenIncrement = makeIncrementer(forIncrement: 7)
+        print(sevenIncrement())
+        print(sevenIncrement())
+        print(sevenIncrement())
     }
     
     
