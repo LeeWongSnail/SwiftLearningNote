@@ -16,4 +16,5 @@
 
 [Closures](https://github.com/LeeWongSnail/SwiftLearningNote/blob/main/Note/Closures.md)
 
+[Enumerations](https://github.com/LeeWongSnail/SwiftLearningNote/blob/main/Note/Enumerations.md)
 
