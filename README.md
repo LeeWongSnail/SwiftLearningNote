@@ -18,3 +18,6 @@
 
 [Enumerations](https://github.com/LeeWongSnail/SwiftLearningNote/blob/main/Note/Enumerations.md)
 
+[Structures and Classes](https://github.com/LeeWongSnail/SwiftLearningNote/blob/main/Note/Structures%20and%20Classes.md)
+
+
