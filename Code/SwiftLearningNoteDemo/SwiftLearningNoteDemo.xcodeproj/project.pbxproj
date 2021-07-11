@@ -19,6 +19,7 @@
 		EB0D0F4E26913C64009AE934 /* CollectionTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0D0F4D26913C64009AE934 /* CollectionTypes.swift */; };
 		EB0D0F532691B061009AE934 /* ControlFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0D0F522691B061009AE934 /* ControlFlow.swift */; };
 		EB0D0F582694A399009AE934 /* Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0D0F572694A399009AE934 /* Closures.swift */; };
+		EB0D0F5D269AFF48009AE934 /* ClassAndStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB0D0F5C269AFF48009AE934 /* ClassAndStruct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,7 @@
 		EB0D0F4D26913C64009AE934 /* CollectionTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTypes.swift; sourceTree = "<group>"; };
 		EB0D0F522691B061009AE934 /* ControlFlow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlFlow.swift; sourceTree = "<group>"; };
 		EB0D0F572694A399009AE934 /* Closures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Closures.swift; sourceTree = "<group>"; };
+		EB0D0F5C269AFF48009AE934 /* ClassAndStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassAndStruct.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 				EB0D0F4D26913C64009AE934 /* CollectionTypes.swift */,
 				EB0D0F522691B061009AE934 /* ControlFlow.swift */,
 				EB0D0F572694A399009AE934 /* Closures.swift */,
+				EB0D0F5C269AFF48009AE934 /* ClassAndStruct.swift */,
 			);
 			path = SwiftLearningNoteDemo;
 			sourceTree = "<group>";
@@ -275,6 +278,7 @@
 				EB0D0F532691B061009AE934 /* ControlFlow.swift in Sources */,
 				EB0D0F1626904D5E009AE934 /* AppDelegate.swift in Sources */,
 				EB0D0F4926904FCF009AE934 /* StringAndCharacter.swift in Sources */,
+				EB0D0F5D269AFF48009AE934 /* ClassAndStruct.swift in Sources */,
 				EB0D0F4E26913C64009AE934 /* CollectionTypes.swift in Sources */,
 				EB0D0F1826904D5E009AE934 /* SceneDelegate.swift in Sources */,
 			);

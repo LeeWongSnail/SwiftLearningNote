@@ -15,15 +15,17 @@ class ViewController: UIViewController {
         // 打印多行字符串
 //        switchFallthrough()
         
-        let tenIncrement = makeIncrementer(forIncrement: 10)
-        print(tenIncrement())
-        print(tenIncrement())
-        print(tenIncrement())
+//        let tenIncrement = makeIncrementer(forIncrement: 10)
+//        print(tenIncrement())
+//        print(tenIncrement())
+//        print(tenIncrement())
+//
+//        let sevenIncrement = makeIncrementer(forIncrement: 7)
+//        print(sevenIncrement())
+//        print(sevenIncrement())
+//        print(sevenIncrement())
+        copyTest()
         
-        let sevenIncrement = makeIncrementer(forIncrement: 7)
-        print(sevenIncrement())
-        print(sevenIncrement())
-        print(sevenIncrement())
     }
     
     
