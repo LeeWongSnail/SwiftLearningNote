@@ -20,4 +20,6 @@
 
 [Structures and Classes](https://github.com/LeeWongSnail/SwiftLearningNote/blob/main/Note/Structures%20and%20Classes.md)
 
+[Properties](https://github.com/LeeWongSnail/SwiftLearningNote/blob/main/Note/Properties.md)
+
 
